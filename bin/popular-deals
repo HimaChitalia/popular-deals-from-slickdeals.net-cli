@@ -1,8 +1,7 @@
 #!/usr/bin/env ruby
-
 # require "bundler/setup"
 # require "popular_deals"
- require "./lib/popular_deals"
+require "./lib/popular_deals"
 
 def reload!
   load_all './lib'

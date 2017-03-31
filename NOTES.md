@@ -7,3 +7,6 @@ What would I like to have in my gem?
 5. It should ask user again for input if they are interested in any deal or if they would like to see list of deals.
 6. It should show user what they are interested in.
 7. If user select to exit, it should exit.
+
+
+CLI -> Scrapper -> Popular deals -> deal discription
