@@ -1,7 +1,7 @@
 #CLI Controller
 class PopularDeals::CLI
 
-  attr_accessor :deals
+  #attr_accessor :deals
 
   def call
     list_deals
@@ -12,7 +12,7 @@ class PopularDeals::CLI
 
   def list_deals
     puts "Today's popular deals are:"
-    @deals = PopularDeals::NewDeals.deals
+    @deals = PopularDeals::NewDeals.new_deals
     @deals.each.with_index(1) do |deal, i|
       puts "#{deal.title} - #{deal.price} - Rating: #{deal.deal_rating}"
       # puts "Available for #{deal.price}"
