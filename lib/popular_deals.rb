@@ -1,5 +1,2 @@
-require "popular_deals/version"
-
-module PopularDeals
-  # Your code goes here...
-end
+require_relative "./popular_deals/version"
+require_relative "./popular_deals/cli"
