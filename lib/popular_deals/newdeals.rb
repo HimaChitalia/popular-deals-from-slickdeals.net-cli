@@ -1,6 +1,6 @@
-class PopularDeals::Deals
+class PopularDeals::NewDeals
 
-  attr_accessor :title, :url, :deal_rating, :price
+  attr_accessor :title, :url, :deal_rating, :price, :posted
 
   def self.deals
     self.scrap_deals
@@ -10,12 +10,27 @@ class PopularDeals::Deals
     deals = []
     deals << self.scrap_slickdeals
     deals
+    #binding.pry
   end
 
   def self.scrap_slickdeals
     doc = Nokogiri::HTML(open("https://slickdeals.net/deals/"))
-    deal = doc.css("div.dealRow").first
-    binding.pry
+
+      all_deals = doc.css("div.dealRow")
+      all_deals.collect do |one_deal|
+      deal = self.new
+      deal.title = one_deal.css("div.dealTitle a.track-popularDealLink").text.strip
+      deal.url = one_deal.css("div.dealTitle a").attribute("href").value
+      deal.deal_rating = one_deal.css("div.ratingCol div.num").text.strip
+      deal.price = one_deal.css("div.priceCol div.price").text.strip
+
+      date = one_deal.css("div.dealLinks").first.text.strip
+      new_array = date.split
+      deal.posted = "#{new_array[0]} #{new_array[1]}"
+      deal
+      #binding.pry
+    end
+    #binding.pry
   end
 end
 

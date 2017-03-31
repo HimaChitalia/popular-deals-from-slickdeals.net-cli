@@ -1,9 +1,18 @@
 #CLI Controller
 class PopularDeals::CLI
 
+  attr_accssor :deals
+
   def call
-    puts "Today's popular deals are:"
-    PopularDeals::Deals.scrap_slickdeals
+    list_deals
+    goodbye
+    #PopularDeals::NewDeals.deals
   end
+
+  def list_deals
+    puts "Today's popular deals are:"
+    @deals = PopularDeals::NewDeals.deals
+  end
+
 
 end
