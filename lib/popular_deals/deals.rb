@@ -1,5 +1,5 @@
 class PopularDeals::Deals
-  attr_accessor :title, :url, :rating, :price, :posted
+  attr_accessor :title, :url, :deal_rating, :price
 
   def self.deals
     self.scrap_deals
@@ -16,3 +16,8 @@ class PopularDeals::Deals
     binding.pry
   end
 end
+
+#title = doc.css("div.dealTitle a.track-popularDealLink").first.text - works
+#url= doc.css("div.dealTitle a").first.attribute("href").value -works
+#deal_rating = doc.css("div.ratingCol div.num").first.text -works
+#price = doc.css("div.priceCol div.price").first.text -works
