@@ -32,16 +32,24 @@ class PopularDeals::CLI
 
   def menu
     input = nil
-    while input != exit
+    while input != "exit"
       puts "Enter the number of deal you would like more info on or type Exit"
         input = gets.strip.downcase
         if input.to_i > 0
-          puts @deals[input.to_i - 1]
+          disply_deal(input)
         elsif input == "list"
           list_deals
         else
           "Don't understand your command. Type list to see the list or exit"
         end
+    end
+  end
+
+  def disply_deal(input)
+    @deals = PopularDeals::NewDeals.new_deals
+    @deals.each do |info|
+        d = info[input.to_i - 1]
+       puts "#{d.title}."
     end
   end
 
