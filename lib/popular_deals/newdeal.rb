@@ -15,7 +15,7 @@ class PopularDeals::NewDeal
 
   def self.create_from_collection(deals_array)
     deals_array.each do |deal|
-      NewDeal.new(deal)
+      PopularDeals::NewDeal.new(deal)
     end
   end
 
