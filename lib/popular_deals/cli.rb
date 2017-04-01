@@ -1,7 +1,7 @@
 #CLI Controller
 class PopularDeals::CLI
 
-  #attr_accessor :deals
+  attr_accessor :product_url
 
   def call
     list_deals
@@ -36,7 +36,8 @@ class PopularDeals::CLI
       puts "Enter the number of deal you would like more info on or type Exit"
         input = gets.strip.downcase
         if input.to_i > 0
-          disply_deal(input)
+          #open_deal_page(input)
+          disply_deal(input, product_url)
         elsif input == "list"
           list_deals
         else
@@ -45,13 +46,32 @@ class PopularDeals::CLI
     end
   end
 
-  def disply_deal(input)
-    @deals = PopularDeals::NewDeals.new_deals
-    @deals.each do |info|
-        d = info[input.to_i - 1]
-       puts "#{d.title}."
-    end
+  # def open_deal_page(input)
+  #   index = input.to_i - 1
+  #   @deals = PopularDeals::NewDeals.new_deals
+  #      @deals.each do |info|
+  #          d = info[index]
+  #         @product_url = "#{d.url}"
+  #      end
+  #      @product_url.to_s
+  #      puts "They got me!"
+  # end
+
+  def disply_deal(input, product_url)
+    puts "They got me too!"
+    deal = PopularDeals::NewDeals.deal_page(input, product_url)
+
+       puts "#{deal}."
+    #end
   end
+
+  # def disply_deal(input)
+  #   @deals = PopularDeals::NewDeals.new_deals
+  #   @deals.each do |info|
+  #       d = info[input.to_i - 1]
+  #      puts "#{d.title}."
+  #   end
+  # end
 
   def goodbye
     puts "Come back again for more deals. Have a great day!"
