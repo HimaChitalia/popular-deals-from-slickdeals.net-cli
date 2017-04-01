@@ -15,18 +15,20 @@ class PopularDeals::CLI
     #@deals = PopularDeals::NewDeals.new_deals
     #@deals.each.with_index(1) do |deal, i|
       #binding.pry
-      @deals = PopularDeals::NewDeals.new_deals
-      @deals.each do |info|
-        info.each.with_index(1) do |deal, i|
-    #     puts "I am checked!"
-         puts "#{i}. #{deal.title} - rating: #{deal.deal_rating}."
+      @deals = PopularDeals::Scraper.scrap_slickdeals
+      puts "It's my turn now!"
+      @deals.each.with_index(1) do |info, i|
+        #info.each.with_index(1) do |deal, i|
+         puts "I am checked!"
+         puts "#{info.url}"
+         #puts "#{i}. #{info.title} - rating: #{info.deal_rating}."
     #     #puts "#{i}. #{r.title} for #{r.price} with a rating of #{r.deal_rating}"
     #   #puts "#{deal.title} - #{deal.price} - Rating: #{deal.deal_rating}"
     #   # puts "Available for #{deal.price}"
     #   # puts "Rating: #{deal.deal_rating}"
     #   # puts "#{deal.title}"
     #   # puts "Available at "
-      end
+      #end
      end
   end
 
