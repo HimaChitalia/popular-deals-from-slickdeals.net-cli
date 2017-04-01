@@ -1,27 +1,15 @@
 class PopularDeals::Scraper
 
-  attr_accessor :title, :url, :deal_rating, :price, :posted
-
-  # def self.new_deals
-  #   self.scrap_deals
-  # end
-  #
-  # def self.scrap_deals
-  #   deals = []
-  #   deals << self.scrap_slickdeals
-  #   deals
-  #   #binding.pry
-  # end
-
   def self.scrap_slickdeals
-      data = []
+    @data = []
      doc = Nokogiri::HTML(open("https://slickdeals.net/deals/"))
 
       all_deals = doc.css("div.dealRow")
       all_deals.collect do |one_deal|
+      link = one_deal.css("div.dealTitle a").attribute("href").value
       each_deal = {
       :title => one_deal.css("div.dealTitle a.track-popularDealLink").text.strip,
-      :url => one_deal.css("div.dealTitle a").attribute("href").value,
+      :url => "https://slickdeals.net/deals#{link}",
       :deal_rating => one_deal.css("div.ratingCol div.num").text.strip,
       :price => one_deal.css("div.priceCol div.price").text.strip,
       :posted => "today"
@@ -32,14 +20,43 @@ class PopularDeals::Scraper
       #string
     }
 
-    data << each_deal
+    @data << each_deal
       #binding.pry
     end
     #binding.pry
-    data
+    @data
   end
+
+
+#def self.find(input)
+
+
+def self.open_deal_page(input)
+index = input.to_i - 1
+@product_url = nil
+dealInfo = @data[index]
+ dealInfo.select do |key, value|
+    if key == "url"
+      @product_url = value
+    end
+ end
+@product_url
 end
 
+def self.deal_page
+  deal = {}
+    html = Nokogiri::HTML(open(@product_url))
+    doc = Nokogiri::HTML(html)
+    deal[:name] = doc.css(".dealTitle h1").text.strip
+    deal[:discription] = doc.css(".textDescription").text.strip
+    deal[:purchase] = doc.css("div a.button").attribute("href")
+    #end
+    deal
+    binding.pry
+  end
+end
+# end
+# end
 #deal = doc.css("div.dealRow").first
 #title = deal.css("div.dealTitle a.track-popularDealLink").text - works
 #url= deal.css("div.dealTitle a").attribute("href").value -works
