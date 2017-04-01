@@ -2,7 +2,7 @@ class PopularDeals::NewDeals
 
   attr_accessor :title, :url, :deal_rating, :price, :posted
 
-  def self.deals
+  def self.new_deals
     self.scrap_deals
   end
 
