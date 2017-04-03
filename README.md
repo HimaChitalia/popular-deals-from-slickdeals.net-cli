@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run the gem, and ask her to list you the popular deals with the 'list' command. And find more details about any deal by pressing the deal number. Lock the deal by visiting given URL. :)
 
 ## Development
 
