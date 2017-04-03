@@ -54,9 +54,9 @@ class PopularDeals::NewDeals
     doc = Nokogiri::HTML(html)
     data = doc.text.strip
     puts "#{data}"
-    deal[:name] = doc.css(".dealTitle h1").text.strip
+    deal[:name] = doc.css("h1").text.strip
     deal[:discription] = doc.css(".textDescription").text.strip
-    deal[:purchase] = doc.css("div a.button").attribute("href").value
+    deal[:purchase] = doc.css("div.detailLeftColumn a.success").attribute("href").value
     #end
     deal
     #binding.pry
