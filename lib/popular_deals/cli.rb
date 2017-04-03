@@ -21,11 +21,13 @@ class PopularDeals::CLI
   def menu
     input = nil
     while input != "exit"
+
       puts ""
       puts "Enter the number of deal you would like more info on or type Exit".light_blue
       puts ""
         input = gets.strip.downcase
         puts ""
+
         if input.to_i > 0 && input.to_i <= 20
           puts ""
           puts "-----------------------------------------------------------------------------------------------------------"
