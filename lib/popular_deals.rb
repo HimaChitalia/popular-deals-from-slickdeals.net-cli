@@ -1,6 +1,8 @@
 require 'open-uri'
 require 'nokogiri'
 require 'pry'
+require 'colorize'
+
 
 require_relative "./popular_deals/version"
 require_relative "./popular_deals/cli"

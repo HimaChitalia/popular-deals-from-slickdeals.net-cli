@@ -42,7 +42,8 @@ class PopularDeals::NewDeals
            d = info[index]
           @product_url = "#{d.url}"
        end
-      puts "#{@product_url}"
+      #puts "#{@product_url}"
+      @product_url
   end
 
   def self.deal_page(input, product_url)
