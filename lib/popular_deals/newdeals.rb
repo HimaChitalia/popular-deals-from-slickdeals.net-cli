@@ -1,6 +1,7 @@
 class PopularDeals::NewDeals
 
-  attr_accessor :title, :url, :deal_rating, :price, :posted
+
+  attr_accessor :title, :url, :deal_rating, :price, :posted, :name, :discription, :purchase
 
   def self.new_deals
     self.scrap_deals
@@ -42,7 +43,6 @@ class PopularDeals::NewDeals
           @product_url = "#{d.url}"
        end
       puts "#{@product_url}"
-
   end
 
   def self.deal_page(input, product_url)
@@ -50,17 +50,20 @@ class PopularDeals::NewDeals
     #puts "#{@product_url}"
   deal = {}
     html = open(@product_url)
-    puts "Ooppps"
     doc = Nokogiri::HTML(html)
     data = doc.text.strip
-    puts "#{data}"
+    #puts "#{data}"
     deal[:name] = doc.css("h1").text.strip
     deal[:discription] = doc.css(".textDescription").text.strip
     deal[:purchase] = doc.css("div.detailLeftColumn a.success").attribute("href").value
+    #deal[:purchase] = doc.at_xpath('//*[@class="success"]//a/@href').to_s
+
     #end
+
     deal
     #binding.pry
   end
+
 end
 #end
 

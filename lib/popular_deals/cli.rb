@@ -36,8 +36,7 @@ class PopularDeals::CLI
       puts "Enter the number of deal you would like more info on or type Exit"
         input = gets.strip.downcase
         if input.to_i > 0
-          #open_deal_page(input)
-          disply_deal(input, product_url)
+            disply_deal(input, product_url)
         elsif input == "list"
           list_deals
         else
@@ -59,11 +58,54 @@ class PopularDeals::CLI
 
   def disply_deal(input, product_url)
     puts "They got me too!"
-    deal = PopularDeals::NewDeals.deal_page(input, product_url)
+    @deal = PopularDeals::NewDeals.deal_page(input, product_url)
+    keys = @deal.keys
+    puts ""
+    puts "Deal: #{@deal[keys[0]]}"
+    puts "------------------------------------"
+    puts ""
+    puts "Deal details: #{@deal[keys[1]]}"
+    puts "-------------------------------------"
+    puts ""
+    puts "See deal: #{@deal[keys[2]]}"
+    puts "-------------------------------------"
+    puts ""
 
-       puts "#{deal}."
+    #puts "#{@deal}"
+    # @deal.each do |key, info|
+    #   puts "#{info}"
+      # puts "Deal: #{info[1]}"
+      # puts "Deal details: #{info[3]}"
+      #puts "#{info}"
+      # info.each do |d|
+      #   puts "#{d[0]}#{d[1]}#{d[2]}"
+        #d
+  #     puts "I am checked!"
+       #puts "#{d.name}."
+  #     #puts "#{i}. #{r.title} for #{r.price} with a rating of #{r.deal_rating}"
+  #   #puts "#{deal.title} - #{deal.price} - Rating: #{deal.deal_rating}"
+  #   # puts "Available for #{deal.price}"
+  #   # puts "Rating: #{deal.deal_rating}"
+  #   # puts "#{deal.title}"
+  #   # puts "Available at "
     #end
-  end
+  #  end #{info.discription}"
+      # puts "To get this deal, visit: #{info.purchase}"
+    end
+    #   deal.each do |info|
+    #  puts "I am checked!"
+    #     puts "#{info}."
+     #puts "#{i}. #{deal.title} - rating: #{deal.deal_rating}."
+#     #puts "#{i}. #{r.title} for #{r.price} with a rating of #{r.deal_rating}"
+#   #puts "#{deal.title} - #{deal.price} - Rating: #{deal.deal_rating}"
+#   # puts "Available for #{deal.price}"
+#   # puts "Rating: #{deal.deal_rating}"
+#   # puts "#{deal.title}"
+#   # puts "Available at "
+  #end
+
+    #end
+  #end
 
   # def disply_deal(input)
   #   @deals = PopularDeals::NewDeals.new_deals
