@@ -1,7 +1,7 @@
 require 'open-uri'
 require 'nokogiri'
 require 'colorize'
-gem 'popular_deals', '0.2.0', :require => 'popular_deals'
+#gem 'popular_deals', '0.2.0', :require => 'popular_deals'
 
 
 
