@@ -1,7 +1,7 @@
 class PopularDeals::NewDeals
 
 
-  attr_accessor :title, :url, :deal_rating, :price, :posted, :name, :discription, :purchase
+  attr_accessor :title, :url, :deal_rating, :price, :posted, :name, :discription, :purchase, :purchase_link
 
   def self.new_deals
     self.scrap_deals
@@ -50,8 +50,14 @@ class PopularDeals::NewDeals
     data = doc.text.strip
     deal[:name] = doc.css("h1").text.strip
     deal[:discription] = doc.css(".textDescription").text.strip
-    deal[:purchase] = doc.css("div.detailLeftColumn a.success").attribute("href").value
-    deal
+    @purchase_link = nil
+    @purchase_link= doc.at_css("div.detailLeftColumn a.success").attr("href")
+      if @purchase_link.nil?
+       deal[:purchase] = @product_url
+     else
+       deal[:purchase] = @purchase_link
+     end
+  deal
   end
 
 end

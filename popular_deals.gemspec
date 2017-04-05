@@ -27,4 +27,5 @@ spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_dependency "nokogiri"
   spec.add_dependency "colorize", '~> 0'
 
+
 end

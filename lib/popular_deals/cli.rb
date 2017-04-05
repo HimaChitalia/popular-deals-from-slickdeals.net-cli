@@ -2,6 +2,7 @@
 class PopularDeals::CLI
 
   attr_accessor :product_url
+  #BROWSER=(/usr/local/bin/firefox-bin -new-tab '%s':/usr/local/bin/google-chrome-stable)
 
   def call
     list_deals
@@ -33,6 +34,7 @@ class PopularDeals::CLI
           puts "-----------------------------------------------------------------------------------------------------------"
           puts "Please see below details of deal no. #{input}".yellow.underline
             disply_deal(input, product_url)
+            #open_deal_in_browser
         elsif input == "list"
           list_deals
         elsif input == "exit"
@@ -43,6 +45,13 @@ class PopularDeals::CLI
         end
     end
   end
+
+  # def open_deal_in_browser
+  #   uri = "http://www.ruby-lang.org"
+  #   Launchy.open( uri ) do |exception|
+  #     puts "Attempted to open #{uri} and failed because #{exception}"
+  #   end
+  # end
 
   def disply_deal(input, product_url)
     @deal = PopularDeals::NewDeals.deal_page(input, product_url)
