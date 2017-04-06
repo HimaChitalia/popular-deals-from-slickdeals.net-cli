@@ -1,19 +1,41 @@
 #CLI Controller
 class PopularDeals::CLI
   BASE_URL = "https://slickdeals.net/deals/"
+  PAGE2_URL = "https://slickdeals.net/deals/?page=2&sort=recent"
   attr_accessor :product_url
   #BROWSER=(/usr/local/bin/firefox-bin -new-tab '%s':/usr/local/bin/google-chrome-stable)
 
   def call
+    select_list_of_deals
     list_deals
     menu
   end
 
+  def select_list_of_deals
+    puts ""
+    puts "What number restaurants would you like to see? 1-20 or 21-40?".upcase.yellow
+    puts ""
+    input = gets.strip.to_i
+    case input
+    when 1 || 1-20 || 1 - 20
+      @deals = @deals = PopularDeals::NewDeals.scrap_slickdeals(BASE_URL)
+      puts ""
+      puts "---------- Deal list #{input} - #{input+19} ----------"
+      puts ""
+    when 21 || 21-40 || 21 -40
+      @deals = @deals = PopularDeals::NewDeals.scrap_slickdeals(PAGE2_URL)
+      puts ""
+      puts "---------- Deal list #{input} - #{input+19} ----------"
+      puts ""
+    end
+    @deals
+  end
+
   def list_deals
-    puts ""
-    puts "Today's popular deals are:".upcase.yellow
-    puts ""
-      @deals = PopularDeals::NewDeals.scrap_slickdeals(BASE_URL)
+    # puts ""
+    # puts "Today's popular deals are:".upcase.yellow
+    # puts ""
+
       #binding.pry
        @deals.each.with_index(1) do |deal, i|
          if i < 10
@@ -64,12 +86,14 @@ class PopularDeals::CLI
           puts "Please see below details of deal no. #{input}".upcase.cyan.bold
             disply_deal(BASE_URL, input, product_url)
             #open_deal_in_browser
-        elsif input == "list"
+        elsif input == "list".downcase
           list_deals
+        elsif input == "select list".downcase 
+          call
         elsif input == "exit"
           goodbye
         else
-          puts "Don't understand your command. Type list to see the list or exit".colorize(:color => :white, :background => :red)
+          puts "Don't understand your command. Type select list to see available deal lists, type list to see the current deal list or exit".colorize(:color => :white, :background => :red)
           puts ""
         end
     end

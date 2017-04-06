@@ -37,16 +37,8 @@ class PopularDeals::NewDeals
   def self.open_deal_page(base_url, input)
     index = input.to_i - 1
     @deals = PopularDeals::NewDeals.scrap_slickdeals(base_url)
-      #binding.pry
-      #@deals.each do |deal|
-        #d = deal[input]
         @product_url = "#{@deals[index].url}"
-      #end
-      #  @deals.each do |info|
-      #      d = info[index]
-      #     @product_url = "#{d.url}"
-      #  end
-      @product_url
+        @product_url
   end
 
   def self.deal_page(base_url, input, product_url)
@@ -57,19 +49,12 @@ class PopularDeals::NewDeals
     data = doc.text.strip
     deal[:name] = doc.css("h1").text.strip
     deal[:discription] = doc.css(".textDescription").text.strip
-    #@purchase_link = ""
-    if doc.at_css("a#largeBuyNow").nil?
+      if doc.at_css("a#largeBuyNow").nil?
       deal[:purchase] = @product_url
     else
       deal[:purchase] = doc.at_css("a#largeBuyNow").attr("href")
     end
-    # @purchase_link= doc.at_css("a#largeBuyNow").attr("href")
-    #     if @purchase_link.nil?
-    #      deal[:purchase] = @product_url
-    #    else
-    #      deal[:purchase] = @purchase_link
-    #    end
-     deal
+   deal
   end
 
 end
