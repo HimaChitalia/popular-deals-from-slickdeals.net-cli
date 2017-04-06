@@ -1,6 +1,7 @@
 require 'open-uri'
 require 'nokogiri'
 require 'colorize'
+require 'pry'
 
 
 

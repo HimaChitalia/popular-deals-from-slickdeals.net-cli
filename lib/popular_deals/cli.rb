@@ -1,6 +1,6 @@
 #CLI Controller
 class PopularDeals::CLI
-
+  BASE_URL = "https://slickdeals.net/deals/"
   attr_accessor :product_url
   #BROWSER=(/usr/local/bin/firefox-bin -new-tab '%s':/usr/local/bin/google-chrome-stable)
 
@@ -13,23 +13,37 @@ class PopularDeals::CLI
     puts ""
     puts "Today's popular deals are:".upcase.yellow
     puts ""
-      @deals = PopularDeals::NewDeals.new_deals
-      @deals.each do |info|
-        info.each.with_index(1) do |deal, i|
-            if i < 10
-              puts "#{i}. #{deal.title}".cyan.bold
-              puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
-              puts "Deal value - #{deal.price}".gsub(/^/, "   ")
-              puts "#{deal.posted}".gsub(/^/, "   ")
-              puts ""
-          elsif i >= 10
-            puts "#{i}. #{deal.title}".cyan.bold
-            puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
-            puts "Deal value - #{deal.price}".gsub(/^/, "    ")
-            puts "#{deal.posted}".gsub(/^/, "    ")
-            puts ""
-          end
-        end
+      @deals = PopularDeals::NewDeals.scrap_slickdeals(BASE_URL)
+      #binding.pry
+       @deals.each.with_index(1) do |deal, i|
+         if i < 10
+           puts "#{i}. #{deal.title}".cyan.bold
+           puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
+           puts "Deal value - #{deal.price}".gsub(/^/, "   ")
+           puts "#{deal.posted}".gsub(/^/, "   ")
+           puts ""
+         elsif i >= 10
+           puts "#{i}. #{deal.title}".cyan.bold
+           puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+           puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+           puts "#{deal.posted}".gsub(/^/, "    ")
+           puts ""
+         end
+      #   info.each.with_index(1) do |deal, i|
+      #       if i < 10
+      #         puts "#{i}. #{deal.title}".cyan.bold
+      #         puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
+      #         puts "Deal value - #{deal.price}".gsub(/^/, "   ")
+      #         puts "#{deal.posted}".gsub(/^/, "   ")
+      #         puts ""
+      #     elsif i >= 10
+      #       puts "#{i}. #{deal.title}".cyan.bold
+      #       puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+      #       puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+      #       puts "#{deal.posted}".gsub(/^/, "    ")
+      #       puts ""
+      #     end
+      #   end
      end
   end
 
@@ -48,7 +62,7 @@ class PopularDeals::CLI
           puts "-----------------------------------------------------------------------------------------------------------"
           puts ""
           puts "Please see below details of deal no. #{input}".upcase.cyan.bold
-            disply_deal(input, product_url)
+            disply_deal(BASE_URL, input, product_url)
             #open_deal_in_browser
         elsif input == "list"
           list_deals
@@ -68,8 +82,8 @@ class PopularDeals::CLI
   #   end
   # end
 
-  def disply_deal(input, product_url)
-    @deal = PopularDeals::NewDeals.deal_page(input, product_url)
+  def disply_deal(base_url, input, product_url)
+    @deal = PopularDeals::NewDeals.deal_page(BASE_URL, input, product_url)
     keys = @deal.keys
     puts ""
     puts "DEAL:".magenta.bold.gsub(/^/, "    ")
