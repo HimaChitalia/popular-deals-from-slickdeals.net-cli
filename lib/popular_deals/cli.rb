@@ -10,11 +10,25 @@ class PopularDeals::CLI
   end
 
   def list_deals
-    puts "Today's popular deals are:"
+    puts ""
+    puts "Today's popular deals are:".upcase.yellow
+    puts ""
       @deals = PopularDeals::NewDeals.new_deals
       @deals.each do |info|
         info.each.with_index(1) do |deal, i|
-          puts "#{i}. #{deal.title} - deal popularity: #{deal.deal_rating}."
+            if i < 10
+              puts "#{i}. #{deal.title}".cyan.bold
+              puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
+              puts "Deal value - #{deal.price}".gsub(/^/, "   ")
+              puts "#{deal.posted}".gsub(/^/, "   ")
+              puts ""
+          elsif i >= 10
+            puts "#{i}. #{deal.title}".cyan.bold
+            puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+            puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+            puts "#{deal.posted}".gsub(/^/, "    ")
+            puts ""
+          end
         end
      end
   end
@@ -24,7 +38,7 @@ class PopularDeals::CLI
     while input != "exit"
 
       puts ""
-      puts "Enter the number of deal you would like more info on or type Exit".light_blue
+      puts "Enter the number of deal you would like more info on or type Exit".light_blue.bold
       puts ""
         input = gets.strip.downcase
         puts ""
@@ -32,7 +46,8 @@ class PopularDeals::CLI
         if input.to_i > 0 && input.to_i <= 20
           puts ""
           puts "-----------------------------------------------------------------------------------------------------------"
-          puts "Please see below details of deal no. #{input}".yellow.underline
+          puts ""
+          puts "Please see below details of deal no. #{input}".upcase.cyan.bold
             disply_deal(input, product_url)
             #open_deal_in_browser
         elsif input == "list"
@@ -57,21 +72,31 @@ class PopularDeals::CLI
     @deal = PopularDeals::NewDeals.deal_page(input, product_url)
     keys = @deal.keys
     puts ""
-    puts "Deal:".yellow
-    puts "#{@deal[keys[0]]}"
+    puts "DEAL:".magenta.bold.gsub(/^/, "    ")
+    puts "#{@deal[keys[0]]}".gsub(/^/, "    ")
     puts ""
-    puts "Description:".yellow
-    puts "#{@deal[keys[1]]}"
+    puts "Description:".upcase.magenta.bold.gsub(/^/, "    ")
+    puts "#{@deal[keys[1]]}".gsub(/^/, "    ")
     puts ""
-    puts "To lock this deal, please visit:".yellow
-    puts "#{@deal[keys[2]]}"
+    if @deal[keys[2]].nil?
+      puts "To lock this deal, please visit:".upcase.magenta.bold.gsub(/^/, "    ")
+      puts "#{product_url}".gsub(/^/, "    ")
+    else
+      puts "To lock this deal, please visit:".upcase.magenta.bold.gsub(/^/, "    ")
+      puts "#{@deal[keys[2]]}".gsub(/^/, "    ")
+    end
+    puts ""
     puts "-----------------------------------------------------------------------------------------------------------"
     puts ""
   end
 
   def goodbye
+    shopping = ["We could give up shopping but we are not a quitter.", "When in doubt, go shopping.", "I still believe in the Holy Trinity, except now it's Target, Trader Joe's, and IKEA.", "I love shopping. There is a little bit of magic found in buying something new. It is instant gratification, a quick fix.", "If you can not stop thinking about it, Buy it!", "Shopping is cheaper than therapy."]
+    line = shopping.sample
     puts ""
-    puts "Come back again for more deals. Have a great day!".light_blue
+    print "#{line}".yellow
+    puts "\u{1f609}"
+    puts "Come back again for more deals. Have a great day!".yellow
     puts ""
   end
 

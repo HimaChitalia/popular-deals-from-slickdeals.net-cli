@@ -50,14 +50,19 @@ class PopularDeals::NewDeals
     data = doc.text.strip
     deal[:name] = doc.css("h1").text.strip
     deal[:discription] = doc.css(".textDescription").text.strip
-    @purchase_link = nil
-    @purchase_link= doc.at_css("div.detailLeftColumn a.success").attr("href")
-      if @purchase_link.nil?
-       deal[:purchase] = @product_url
-     else
-       deal[:purchase] = @purchase_link
-     end
-  deal
+    #@purchase_link = ""
+    if doc.at_css("a#largeBuyNow").nil?
+      deal[:purchase] = @product_url
+    else
+      deal[:purchase] = doc.at_css("a#largeBuyNow").attr("href")
+    end
+    # @purchase_link= doc.at_css("a#largeBuyNow").attr("href")
+    #     if @purchase_link.nil?
+    #      deal[:purchase] = @product_url
+    #    else
+    #      deal[:purchase] = @purchase_link
+    #    end
+     deal
   end
 
 end
