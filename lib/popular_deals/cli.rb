@@ -12,7 +12,7 @@ class PopularDeals::CLI
     select_list_of_deals
     list_deals
     menu
-    #goodbye
+    goodbye
   end
 
   def select_list_of_deals
@@ -52,18 +52,13 @@ class PopularDeals::CLI
       puts "---------- Deal list #{input} - #{input+19} ----------"
       puts ""
     else
-      puts "Don't understand that command"
+      puts "Don't understand that command".colorize(:color => :white, :background => :red)
       select_list_of_deals
     end
     @deals
   end
 
   def list_deals
-    # puts ""
-    # puts "Today's popular deals are:".upcase.yellow
-    # puts ""
-
-      #binding.pry
        @deals.each.with_index(1) do |deal, i|
          if i < 10
            puts "#{i}. #{deal.title}".cyan.bold
@@ -78,22 +73,7 @@ class PopularDeals::CLI
            puts "#{deal.posted}".gsub(/^/, "    ")
            puts ""
          end
-      #   info.each.with_index(1) do |deal, i|
-      #       if i < 10
-      #         puts "#{i}. #{deal.title}".cyan.bold
-      #         puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
-      #         puts "Deal value - #{deal.price}".gsub(/^/, "   ")
-      #         puts "#{deal.posted}".gsub(/^/, "   ")
-      #         puts ""
-      #     elsif i >= 10
-      #       puts "#{i}. #{deal.title}".cyan.bold
-      #       puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
-      #       puts "Deal value - #{deal.price}".gsub(/^/, "    ")
-      #       puts "#{deal.posted}".gsub(/^/, "    ")
-      #       puts ""
-      #     end
-      #   end
-     end
+       end
   end
 
   def menu
@@ -103,58 +83,33 @@ class PopularDeals::CLI
       puts ""
       puts "Enter the number of deal you would like more info on or type Exit.".light_blue.bold
       puts ""
-        input = gets.strip.downcase
-        puts ""
-        #unless input == "exit"
-          if input.to_i > 0 && input.to_i <= 20
-            puts ""
-            puts "-----------------------------------------------------------------------------------------------------------"
-            puts ""
-            puts "Please see below details of deal no. #{input}".upcase.cyan.bold
-              disply_deal(BASE_URL, input, product_url)
-              #open_deal_in_browser
-          elsif input == "list"
-            list_deals
-          elsif input == "select list"
-            call
-          elsif input == "exit"
-            goodbye
+      input = gets.strip.downcase
+      puts ""
 
-          else
-            puts "Don't understand your command.".colorize(:color => :white, :background => :red)
-            puts "Type 'SELECT LIST' to see available deal lists.".yellow
-            puts "Type 'LIST' to see the current deal list.".yellow
-            puts "Type 'EXIT' to exit.".yellow
-            puts ""
-          end
+        if input.to_i > 0 && input.to_i <= 20
+          puts ""
+          puts "-----------------------------------------------------------------------------------------------------------"
+          puts ""
+          puts "Please see below details of deal no. #{input}".upcase.cyan.bold
+            disply_deal(BASE_URL, input, product_url)
+            #open_deal_in_browser
+        elsif input == "list"
+          list_deals
+        elsif input == "select list"
+          call
+        elsif input == "exit"
+          puts ""
+          break
+        else
+          puts "Don't understand your command.".colorize(:color => :white, :background => :red)
+          puts "Type 'SELECT LIST' to see available deal lists.".yellow
+          puts "Type 'LIST' to see the current deal list.".yellow
+          puts "Type 'EXIT' to exit.".yellow
+          puts ""
+        end
       end
-        # if input.to_i > 0 && input.to_i <= 20
-        #   puts ""
-        #   puts "-----------------------------------------------------------------------------------------------------------"
-        #   puts ""
-        #   puts "Please see below details of deal no. #{input}".upcase.cyan.bold
-        #     disply_deal(BASE_URL, input, product_url)
-        #     #open_deal_in_browser
-        # elsif input == "list"
-        #   list_deals
-        # elsif input == "select list"
-        #   call
-        # elsif input == "exit"
-        #   goodbye
-        #   break
-        # else
-        #   puts "Don't understand your command. Type select list to see available deal lists, type list to see the current deal list or exit".colorize(:color => :white, :background => :red)
-        #   puts ""
-        # end
-    #end
+    #goodbye
   end
-
-  # def open_deal_in_browser
-  #   uri = "http://www.ruby-lang.org"
-  #   Launchy.open( uri ) do |exception|
-  #     puts "Attempted to open #{uri} and failed because #{exception}"
-  #   end
-  # end
 
   def disply_deal(base_url, input, product_url)
     @deal = PopularDeals::NewDeals.deal_page(BASE_URL, input, product_url)

@@ -3,17 +3,6 @@ class PopularDeals::NewDeals
 
   attr_accessor :title, :url, :deal_rating, :price, :posted, :name, :discription, :purchase, :purchase_link
 
-  # def self.new_deals
-  #   self.scrap_deals
-  # end
-  #
-  # def self.scrap_deals
-  #   deals = []
-  #   deals << self.scrap_slickdeals
-  #   deals
-  # end
-
-
   def self.scrap_slickdeals(base_url)
     doc = Nokogiri::HTML(open(base_url))
       deals = []
