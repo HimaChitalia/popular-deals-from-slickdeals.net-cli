@@ -9,11 +9,20 @@ class PopularDeals::CLI
   #BROWSER=(/usr/local/bin/firefox-bin -new-tab '%s':/usr/local/bin/google-chrome-stable)
 
   def call
+    scrap_all_deals
     select_list_of_deals
-    list_deals
-    menu
+    #list_deals
+    #menu
     #goodbye
   end
+
+  def scrap_all_deals
+    PopularDeals::Scrapper.scrap_slickdeals(BASE_URL)
+    PopularDeals::Scrapper.scrap_slickdeals(PAGE2_URL)
+    PopularDeals::Scrapper.scrap_slickdeals(PAGE3_URL)
+    PopularDeals::Scrapper.scrap_slickdeals(PAGE4_URL)
+    PopularDeals::Scrapper.scrap_slickdeals(PAGE5_URL)
+end
 
   def select_list_of_deals
     puts ""
@@ -24,109 +33,286 @@ class PopularDeals::CLI
     puts "Type 4 for the fourth list of 61-80 deals.".yellow
     puts "Type 5 for the fifth list of 81-100 deals.".yellow
     puts ""
-    input = gets.strip.to_i
-    case input
+    @input1 = gets.strip.to_i
+    case @input1
     when 1
-      @deals = @deals = PopularDeals::NewDeals.scrap_slickdeals(BASE_URL)
+      @deals = PopularDeals::NewDeals.all[0..19]
+      #binding.pry
+      #@deals = list1_deals[0..19]
       puts ""
       puts "------------------ Deal list:1 - deals 1 - 20 ------------------".yellow
       puts ""
-    when 2
-      @deals = @deals = PopularDeals::NewDeals.scrap_slickdeals(PAGE2_URL)
-      puts ""
-      puts "------------------ Deal list:2 - deals 21 - 40 ------------------".yellow
-      puts ""
-    when 3
-      @deals = @deals = PopularDeals::NewDeals.scrap_slickdeals(PAGE3_URL)
-      puts ""
-      puts "------------------ Deal list:3 - deals 41 - 60 ------------------".yellow
-      puts ""
-    when 4
-      @deals = @deals = PopularDeals::NewDeals.scrap_slickdeals(PAGE4_URL)
-      puts ""
-      puts "------------------ Deal list:4 - deals 61 - 80 ------------------".yellow
-      puts ""
-    when 5
-      @deals = @deals = PopularDeals::NewDeals.scrap_slickdeals(PAGE5_URL)
-      puts ""
-      puts "------------------ Deal list:5 - deals 81 - 100 ------------------".yellow
-      puts ""
+      list1_actions
+    # when 2
+    #   @deals = PopularDeals::NewDeals.all[20..39]
+    #   #@deals = list1_deals[20..39]
+    #   puts ""
+    #   puts "------------------ Deal list:2 - deals 21 - 40 ------------------".yellow
+    #   puts ""
+    #   list2_actions
+    # when 3
+    #   @deals = PopularDeals::NewDeals.all[40..59]
+    #   #@deals = list1_deals[40..59]
+    #   puts ""
+    #   puts "------------------ Deal list:3 - deals 41 - 60 ------------------".yellow
+    #   puts ""
+    #   list3_actions
+    # when 4
+    #   @deals = PopularDeals::NewDeals.all[60..79]
+    #   #deals = list1_deals[60..79]
+    #   puts ""
+    #   puts "------------------ Deal list:4 - deals 61 - 80 ------------------".yellow
+    #   puts ""
+    #   list4_actions
+    # when 5
+    #   @deals = PopularDeals::NewDeals.all[80..99]
+    #   #deals = list1_deals[80..99]
+    #   puts ""
+    #   puts "------------------ Deal list:5 - deals 81 - 100 ------------------".yellow
+    #   puts ""
+    #   list5_actions
     else
       puts "Don't understand that command".colorize(:color => :white, :background => :red)
-      select_list_of_deals
+      #select_list_of_deals
     end
     @deals
   end
 
-  def list_deals
-       @deals.each.with_index(1) do |deal, i|
-         if i < 10
-           puts "#{i}. #{deal.title}".cyan.bold
-           puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
-           puts "Deal value - #{deal.price}".gsub(/^/, "   ")
-           puts "#{deal.posted}".gsub(/^/, "   ")
-           puts ""
-         elsif i >= 10
-           puts "#{i}. #{deal.title}".cyan.bold
-           puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
-           puts "Deal value - #{deal.price}".gsub(/^/, "    ")
-           puts "#{deal.posted}".gsub(/^/, "    ")
-           puts ""
-         end
-       end
-  end
+  # def list_deals
+  #     #@deals
+  #      #puts "#{@deals}"
+  #      @deals.each.with_index(1) do |deal, i|
+  #        if i < 10
+  #          puts "#{i}. #{deal.title}".cyan.bold
+  #          puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
+  #          puts "Deal value - #{deal.price}".gsub(/^/, "   ")
+  #          puts "#{deal.posted}".gsub(/^/, "   ")
+  #          puts ""
+  #        elsif i >= 10
+  #          puts "#{i}. #{deal.title}".cyan.bold
+  #          puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+  #          puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+  #          puts "#{deal.posted}".gsub(/^/, "    ")
+  #          puts ""
+  #        end
+  #      end
+  # end
 
-  def menu
-    input = nil
-    while input != "exit"
+  # def menu
+  #
+  #   case @input1
+  #     when 1
+  #         list1_actions
+  #       when 2
+  #         list2_actions
+  #         when 3
+  #           list3_actions
+  #           when 4
+  #             list4_actions
+  #             when 5
+  #               list5_actions
+  #       end
+
+  def list1_actions
+    @deals.each.with_index(1) do |deal, i|
+      if i < 10
+        puts "#{i}. #{deal.title}".cyan.bold
+        puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
+        puts "Deal value - #{deal.price}".gsub(/^/, "   ")
+        puts "#{deal.posted}".gsub(/^/, "   ")
+        puts ""
+      elsif i >= 10
+        puts "#{i}. #{deal.title}".cyan.bold
+        puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+        puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+        puts "#{deal.posted}".gsub(/^/, "    ")
+        puts ""
+      end
+    end
+    @input = nil
+    while @input != "exit"
 
       puts ""
       puts "Enter the number of deal you would like more info on or type Exit.".light_blue.bold
       puts ""
-      input = gets.strip.downcase
+      @input = gets.strip.downcase
       puts ""
-
-        if input.to_i > 0 && input.to_i <= 20
-          puts ""
-          puts "-----------------------------------------------------------------------------------------------------------"
-          puts ""
-          puts "Please see below details of deal no. #{input}".upcase.cyan.bold
-            disply_deal(BASE_URL, input, product_url)
-            #open_deal_in_browser
-        elsif input == "list"
-          list_deals
-        elsif input == "select list"
-          call
-          break
-        elsif input == "exit"
-          goodbye
-        else
-          puts "Don't understand your command.".colorize(:color => :white, :background => :red)
-          puts "Type 'SELECT LIST' to see available deal lists.".yellow
-          puts "Type 'LIST' to see the current deal list.".yellow
-          puts "Type 'EXIT' to exit.".yellow
-          puts ""
-        end
-      end
-    #goodbye
+    if @input.to_i > 0 && @input.to_i <= 20
+      puts ""
+      puts "-----------------------------------------------------------------------------------------------------------"
+      puts ""
+      puts "Please see below details of deal no. #{@input}".upcase.cyan.bold
+        disply_deal(BASE_URL, @input, product_url)
+        #open_deal_in_browser
+    elsif @input == "list"
+      list_deals
+    elsif @input == "select list"
+      call
+      #break
+    elsif @input == "exit"
+      goodbye
+    else
+      puts "Don't understand your command.".colorize(:color => :white, :background => :red)
+      puts "Type 'SELECT LIST' to see available deal lists.".yellow
+      puts "Type 'LIST' to see the current deal list.".yellow
+      puts "Type 'EXIT' to exit.".yellow
+      puts ""
+    end
+  end
   end
 
+  # def list2_actions
+  #   @deals.each.with_index(21) do |deal, i|
+  #       puts "#{i}. #{deal.title}".cyan.bold
+  #       puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+  #       puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+  #       puts "#{deal.posted}".gsub(/^/, "    ")
+  #       puts ""
+  #   end
+  #   input_for_deal
+  #   if @input.to_i > 20 && @input.to_i <= 40
+  #     puts ""
+  #     puts "-----------------------------------------------------------------------------------------------------------"
+  #     puts ""
+  #     puts "Please see below details of deal no. #{@input}".upcase.cyan.bold
+  #       disply_deal(BASE_URL, @input, product_url)
+  #       #open_deal_in_browser
+  #   elsif @input == "list"
+  #     list_deals
+  #   elsif @input == "select list"
+  #     call
+  #     #break
+  #   elsif @input == "exit"
+  #     goodbye
+  #   else
+  #     puts "Don't understand your command.".colorize(:color => :white, :background => :red)
+  #     puts "Type 'SELECT LIST' to see available deal lists.".yellow
+  #     puts "Type 'LIST' to see the current deal list.".yellow
+  #     puts "Type 'EXIT' to exit.".yellow
+  #     puts ""
+  #   end
+  # end
+  #
+  # def list3_actions
+  #   @deals.each.with_index(41) do |deal, i|
+  #       puts "#{i}. #{deal.title}".cyan.bold
+  #       puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+  #       puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+  #       puts "#{deal.posted}".gsub(/^/, "    ")
+  #       puts ""
+  #   end
+  #   input_for_deal
+  #   if @input.to_i > 40 && @input.to_i <= 60
+  #       puts ""
+  #       puts "-----------------------------------------------------------------------------------------------------------"
+  #       puts ""
+  #       puts "Please see below details of deal no. #{@input}".upcase.cyan.bold
+  #         disply_deal(BASE_URL, @input, product_url)
+  #         #open_deal_in_browser
+  #     elsif @input == "list"
+  #       list_deals
+  #     elsif @input == "select list"
+  #       call
+  #       #break
+  #     elsif @input == "exit"
+  #       goodbye
+  #     else
+  #       puts "Don't understand your command.".colorize(:color => :white, :background => :red)
+  #       puts "Type 'SELECT LIST' to see available deal lists.".yellow
+  #       puts "Type 'LIST' to see the current deal list.".yellow
+  #       puts "Type 'EXIT' to exit.".yellow
+  #       puts ""
+  #     end
+  # end
+
+  # def list4_actions
+  #   @deals.each.with_index(61) do |deal, i|
+  #       puts "#{i}. #{deal.title}".cyan.bold
+  #       puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+  #       puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+  #       puts "#{deal.posted}".gsub(/^/, "    ")
+  #       puts ""
+  #   end
+  #   input_for_deal
+  #     if @input.to_i > 60 && @input.to_i <= 80
+  #       puts ""
+  #       puts "-----------------------------------------------------------------------------------------------------------"
+  #       puts ""
+  #       puts "Please see below details of deal no. #{@input}".upcase.cyan.bold
+  #         disply_deal(BASE_URL, @input, product_url)
+  #         #open_deal_in_browser
+  #     elsif @input == "list"
+  #       list_deals
+  #     elsif @input == "select list"
+  #       call
+  #       #break
+  #     elsif @input == "exit"
+  #       goodbye
+  #     else
+  #       puts "Don't understand your command.".colorize(:color => :white, :background => :red)
+  #       puts "Type 'SELECT LIST' to see available deal lists.".yellow
+  #       puts "Type 'LIST' to see the current deal list.".yellow
+  #       puts "Type 'EXIT' to exit.".yellow
+  #       puts ""
+  #     end
+  # end
+
+  # def list5_actions
+  #   @deals.each.with_index(81) do |deal, i|
+  #     if i > 100
+  #       puts "#{i}. #{deal.title}".cyan.bold
+  #       puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+  #       puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+  #       puts "#{deal.posted}".gsub(/^/, "    ")
+  #       puts ""
+  #     else
+  #       puts "#{i}. #{deal.title}".cyan.bold
+  #       puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
+  #       puts "Deal value - #{deal.price}".gsub(/^/, "   ")
+  #       puts "#{deal.posted}".gsub(/^/, "   ")
+  #       puts ""
+  #     end
+  #   end
+  #   input_for_deal
+  #   if @input.to_i > 80 && @input.to_i <= 100
+  #     puts ""
+  #     puts "-----------------------------------------------------------------------------------------------------------"
+  #     puts ""
+  #     puts "Please see below details of deal no. #{@input}".upcase.cyan.bold
+  #       disply_deal(BASE_URL, @input, product_url)
+  #       #open_deal_in_browser
+  #   elsif @input == "list"
+  #     list_deals
+  #   elsif @input == "select list"
+  #     call
+  #     #break
+  #   elsif @input == "exit"
+  #     goodbye
+  #   else
+  #     puts "Don't understand your command.".colorize(:color => :white, :background => :red)
+  #     puts "Type 'SELECT LIST' to see available deal lists.".yellow
+  #     puts "Type 'LIST' to see the current deal list.".yellow
+  #     puts "Type 'EXIT' to exit.".yellow
+  #     puts ""
+  #   end
+  # end
+
   def disply_deal(base_url, input, product_url)
-    @deal = PopularDeals::NewDeals.deal_page(BASE_URL, input, product_url)
-    keys = @deal.keys
+    deal = PopularDeals::Scrapper.deal_page(BASE_URL, input, product_url)
+    keys = deal.keys
     puts ""
     puts "DEAL:".magenta.bold.gsub(/^/, "    ")
-    puts "#{@deal[keys[0]]}".gsub(/^/, "    ")
+    puts "#{deal[keys[0]]}".gsub(/^/, "    ")
     puts ""
     puts "Description:".upcase.magenta.bold.gsub(/^/, "    ")
-    puts "#{@deal[keys[1]]}".gsub(/^/, "    ")
+    puts "#{deal[keys[1]]}".gsub(/^/, "    ")
     puts ""
-    if @deal[keys[2]].nil?
+    if deal[keys[2]].nil?
       puts "To lock this deal, please visit:".upcase.magenta.bold.gsub(/^/, "    ")
       puts "#{product_url}".gsub(/^/, "    ")
     else
       puts "To lock this deal, please visit:".upcase.magenta.bold.gsub(/^/, "    ")
-      puts "#{@deal[keys[2]]}".gsub(/^/, "    ")
+      puts "#{deal[keys[2]]}".gsub(/^/, "    ")
     end
     puts ""
     puts "-----------------------------------------------------------------------------------------------------------"
