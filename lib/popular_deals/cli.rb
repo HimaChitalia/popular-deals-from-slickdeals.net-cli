@@ -29,27 +29,27 @@ class PopularDeals::CLI
     when 1
       @deals = @deals = PopularDeals::NewDeals.scrap_slickdeals(BASE_URL)
       puts ""
-      puts "---------- Deal list #{input} - #{input+19} ----------"
+      puts "------------------ Deal list:1 - deals 1 - 20 ------------------".yellow
       puts ""
     when 2
       @deals = @deals = PopularDeals::NewDeals.scrap_slickdeals(PAGE2_URL)
       puts ""
-      puts "---------- Deal list #{input} - #{input+19} ----------"
+      puts "------------------ Deal list:2 - deals 21 - 40 ------------------".yellow
       puts ""
     when 3
       @deals = @deals = PopularDeals::NewDeals.scrap_slickdeals(PAGE3_URL)
       puts ""
-      puts "---------- Deal list #{input} - #{input+19} ----------"
+      puts "------------------ Deal list:3 - deals 41 - 60 ------------------".yellow
       puts ""
     when 4
       @deals = @deals = PopularDeals::NewDeals.scrap_slickdeals(PAGE4_URL)
       puts ""
-      puts "---------- Deal list #{input} - #{input+19} ----------"
+      puts "------------------ Deal list:4 - deals 61 - 80 ------------------".yellow
       puts ""
     when 5
       @deals = @deals = PopularDeals::NewDeals.scrap_slickdeals(PAGE5_URL)
       puts ""
-      puts "---------- Deal list #{input} - #{input+19} ----------"
+      puts "------------------ Deal list:5 - deals 81 - 100 ------------------".yellow
       puts ""
     else
       puts "Don't understand that command".colorize(:color => :white, :background => :red)
