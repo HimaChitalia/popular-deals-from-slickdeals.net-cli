@@ -1,6 +1,6 @@
 # PopularDeals
 
-This is a CLI gem to browse through the popular deals on slickdeals.net.
+This is a CLI gem to browse through top 100 popular deals on slickdeals.net.
 
 ## Installation
 
