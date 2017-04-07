@@ -12,7 +12,7 @@ class PopularDeals::CLI
     select_list_of_deals
     list_deals
     menu
-    goodbye
+    #goodbye
   end
 
   def select_list_of_deals
@@ -97,9 +97,9 @@ class PopularDeals::CLI
           list_deals
         elsif input == "select list"
           call
-        elsif input == "exit"
-          puts ""
           break
+        elsif input == "exit"
+          goodbye
         else
           puts "Don't understand your command.".colorize(:color => :white, :background => :red)
           puts "Type 'SELECT LIST' to see available deal lists.".yellow

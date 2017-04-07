@@ -10,7 +10,13 @@ Gem::Specification.new do |spec|
   spec.email         = ["'hima_chhag@yahoo.com'"]
 
   spec.summary       = %q{It displays popular deals of the day from https://slickdeals.net/deals/ with popular-deals command.}
-  spec.description   = %q{This CLI App displays a list of the popular deals with deal rating and price. Just use 'popular-deals' command. You can also see a deal details by selecting number of the deal you may be interested in.}
+  #spec.description   = %q{This CLI gem displays 100 popular deals with deal rating and price from slickdeals.net/deals. Just use 'popular-deals' command. You can also see a deal details by selecting number of the deal you may be interested in.}
+  spec.description   = <<-EOF
+  This CLI gem displays 100 popular deals with ratings and prices from slickdeals.net/deals. Just use 'popular-deals' command.
+
+  You can also view more details by typing respective deal number.
+  EOF
+
   spec.homepage      = "https://github.com/HimaChitalia/popular_deals"
   spec.license       = "MIT"
 
