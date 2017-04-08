@@ -10,6 +10,7 @@ class PopularDeals::CLI
 
   def call
     scrap_all_deals
+    #deals
     select_list_of_deals
   end
 
@@ -19,27 +20,7 @@ class PopularDeals::CLI
     PopularDeals::Scrapper.scrap_slickdeals(PAGE3_URL)
     PopularDeals::Scrapper.scrap_slickdeals(PAGE4_URL)
     PopularDeals::Scrapper.scrap_slickdeals(PAGE5_URL)
-end
-
-# def deals_listing
-#   deals = PopularDeals::NewDeals.all
-#   all_deals = []
-#   deals.each do |deal|
-#     if i < 10
-#       puts "#{i}. #{deal.title}".cyan.bold
-#       puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
-#       puts "Deal value - #{deal.price}".gsub(/^/, "   ")
-#       puts "#{deal.posted}".gsub(/^/, "   ")
-#       puts ""
-#     elsif i >= 10
-#       puts "#{i}. #{deal.title}".cyan.bold
-#       puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
-#       puts "Deal value - #{deal.price}".gsub(/^/, "    ")
-#       puts "#{deal.posted}".gsub(/^/, "    ")
-#       puts ""
-#     end
-#   end
-# end
+  end
 
   def select_list_of_deals
     puts ""
@@ -53,34 +34,14 @@ end
     input1 = gets.strip.to_i
     case input1
     when 1
-      @deals = PopularDeals::NewDeals.all[0..19]
-      puts ""
-      puts "------------------ Deal list:1 - deals 1 - 20 ------------------".yellow
-      puts ""
       list1_actions
     when 2
-      @deals = PopularDeals::NewDeals.all[20..39]
-      puts ""
-      puts "------------------ Deal list:2 - deals 21 - 40 ------------------".yellow
-      puts ""
       list2_actions
     when 3
-      @deals = PopularDeals::NewDeals.all[40..59]
-      puts ""
-      puts "------------------ Deal list:3 - deals 41 - 60 ------------------".yellow
-      puts ""
       list3_actions
     when 4
-      @deals = PopularDeals::NewDeals.all[60..79]
-      puts ""
-      puts "------------------ Deal list:4 - deals 61 - 80 ------------------".yellow
-      puts ""
       list4_actions
     when 5
-      @deals = PopularDeals::NewDeals.all[80..99]
-      puts ""
-      puts "------------------ Deal list:5 - deals 81 - 100 ------------------".yellow
-      puts ""
       list5_actions
     else
       puts "Don't understand that command".colorize(:color => :white, :background => :red)
@@ -89,11 +50,21 @@ end
     @deals
   end
 
+  # def deals
+  #   all_deals = PopularDeals::NewDeals.all
+  #   @deals = []
+  #   all_deals.collect do |deal_info|
+  #     deal_info.number = all_deals.index(deal_info).to_i + 1
+  #     @deals << deal_info
+  #   end
+  #   @deals
+  # end
+
   def deal_list
-    @deals.each do |deal|
+  @deals.each do |deal|
       i = "#{deal.number}".to_i
     if  i < 10
-      puts "#{deal.number}. #{deal.title}".cyan.bold
+      puts "#{i}. #{deal.title}".cyan.bold
       puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
       puts "Deal value - #{deal.price}".gsub(/^/, "   ")
       puts "#{deal.posted}".gsub(/^/, "   ")
@@ -104,27 +75,22 @@ end
       puts "Deal value - #{deal.price}".gsub(/^/, "    ")
       puts "#{deal.posted}".gsub(/^/, "    ")
       puts ""
+    elsif i >= 100
+      puts "#{i}. #{deal.title}".cyan.bold
+      puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "     ")
+      puts "Deal value - #{deal.price}".gsub(/^/, "     ")
+      puts "#{deal.posted}".gsub(/^/, "     ")
+      puts ""
     end
   end
   end
 
   def list1_actions
-    #@deals.each.with_index(1) do |deal, i|
+    @deals = PopularDeals::NewDeals.deals[0..19]
+    puts ""
+    puts "------------------ Deal list:1 - deals 1 - 20 ------------------".yellow
+    puts ""
       deal_list
-      # if i < 10
-      #   puts "#{i}. #{deal.title}".cyan.bold
-      #   puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
-      #   puts "Deal value - #{deal.price}".gsub(/^/, "   ")
-      #   puts "#{deal.posted}".gsub(/^/, "   ")
-      #   puts ""
-      # elsif i >= 10
-      #   puts "#{i}. #{deal.title}".cyan.bold
-      #   puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
-      #   puts "Deal value - #{deal.price}".gsub(/^/, "    ")
-      #   puts "#{deal.posted}".gsub(/^/, "    ")
-      #   puts ""
-      # end
-    #end
     input = nil
     while input != "exit"
 
@@ -155,14 +121,11 @@ end
   end
 
   def list2_actions
+    @deals = PopularDeals::NewDeals.deals[20..39]
+    puts ""
+    puts "------------------ Deal list:2 - deals 21 - 40 ------------------".yellow
+    puts ""
     deal_list
-    # @deals.each.with_index(21) do |deal, i|
-    #     puts "#{i}. #{deal.title}".cyan.bold
-    #     puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
-    #     puts "Deal value - #{deal.price}".gsub(/^/, "    ")
-    #     puts "#{deal.posted}".gsub(/^/, "    ")
-    #     puts ""
-    # end
     input = nil
     while input != "exit"
 
@@ -192,13 +155,11 @@ end
   end
 
   def list3_actions
-    @deals.each.with_index(41) do |deal, i|
-        puts "#{i}. #{deal.title}".cyan.bold
-        puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
-        puts "Deal value - #{deal.price}".gsub(/^/, "    ")
-        puts "#{deal.posted}".gsub(/^/, "    ")
-        puts ""
-    end
+    @deals = PopularDeals::NewDeals.deals[40..59]
+    puts ""
+    puts "------------------ Deal list:3 - deals 41 - 60 ------------------".yellow
+    puts ""
+    deal_list
     input = nil
     while input != "exit"
 
@@ -229,13 +190,11 @@ end
   end
 
   def list4_actions
-    @deals.each.with_index(61) do |deal, i|
-        puts "#{i}. #{deal.title}".cyan.bold
-        puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
-        puts "Deal value - #{deal.price}".gsub(/^/, "    ")
-        puts "#{deal.posted}".gsub(/^/, "    ")
-        puts ""
-    end
+    @deals = PopularDeals::NewDeals.deals[60..79]
+    puts ""
+    puts "------------------ Deal list:4 - deals 61 - 80 ------------------".yellow
+    puts ""
+    deal_list
     input = nil
     while input != "exit"
 
@@ -265,21 +224,11 @@ end
   end
 
   def list5_actions
-    @deals.each.with_index(81) do |deal, i|
-      if i > 100
-        puts "#{i}. #{deal.title}".cyan.bold
-        puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
-        puts "Deal value - #{deal.price}".gsub(/^/, "    ")
-        puts "#{deal.posted}".gsub(/^/, "    ")
-        puts ""
-      else
-        puts "#{i}. #{deal.title}".cyan.bold
-        puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
-        puts "Deal value - #{deal.price}".gsub(/^/, "    ")
-        puts "#{deal.posted}".gsub(/^/, "    ")
-        puts ""
-      end
-    end
+    @deals = PopularDeals::NewDeals.deals[80..99]
+    puts ""
+    puts "------------------ Deal list:5 - deals 81 - 100 ------------------".yellow
+    puts ""
+    deal_list
     input = nil
     while input != "exit"
 

@@ -19,4 +19,14 @@ class PopularDeals::NewDeals
     product_url
   end
 
+  def self.deals
+    all_deals = @@all
+    @deals = []
+    all_deals.collect do |deal_info|
+      deal_info.number = all_deals.index(deal_info).to_i + 1
+      @deals << deal_info
+    end
+    @deals
+  end
+
 end
