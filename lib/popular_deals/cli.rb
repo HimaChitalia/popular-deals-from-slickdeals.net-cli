@@ -10,7 +10,6 @@ class PopularDeals::CLI
 
   def call
     scrap_all_deals
-    #deals
     select_list_of_deals
   end
 
@@ -47,18 +46,7 @@ class PopularDeals::CLI
       puts "Don't understand that command".colorize(:color => :white, :background => :red)
       select_list_of_deals
     end
-    @deals
   end
-
-  # def deals
-  #   all_deals = PopularDeals::NewDeals.all
-  #   @deals = []
-  #   all_deals.collect do |deal_info|
-  #     deal_info.number = all_deals.index(deal_info).to_i + 1
-  #     @deals << deal_info
-  #   end
-  #   @deals
-  # end
 
   def deal_list
   @deals.each do |deal|
