@@ -3,9 +3,15 @@ class PopularDeals::Scrapper
   def self.scrap_slickdeals(base_url)
     doc = Nokogiri::HTML(open(base_url))
       #deals = []
+    #  i = 1
+
       all_deals = doc.css("div.dealRow")
-      all_deals.collect do |one_deal|
+      all_deals.each.with_index(1).collect do |one_deal|
+        #i = 1
+        #while i <= 100
       deal = PopularDeals::NewDeals.new
+      #deal.number = i
+      #i = i + 1
       deal.title = one_deal.css("div.dealTitle a.track-popularDealLink").text.strip
       link = one_deal.css("div.dealTitle a").attribute("href").value
       deal.url = "https://slickdeals.net#{link}"
@@ -16,8 +22,12 @@ class PopularDeals::Scrapper
       new_array = date.split
       deal.posted = "#{new_array[0]} #{new_array[1]}"
       deal.save
+
+    #end
       #deals << deal
+    #end
     end
+    #no = no + 1
     #deals
   end
 

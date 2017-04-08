@@ -21,6 +21,26 @@ class PopularDeals::CLI
     PopularDeals::Scrapper.scrap_slickdeals(PAGE5_URL)
 end
 
+# def deals_listing
+#   deals = PopularDeals::NewDeals.all
+#   all_deals = []
+#   deals.each do |deal|
+#     if i < 10
+#       puts "#{i}. #{deal.title}".cyan.bold
+#       puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
+#       puts "Deal value - #{deal.price}".gsub(/^/, "   ")
+#       puts "#{deal.posted}".gsub(/^/, "   ")
+#       puts ""
+#     elsif i >= 10
+#       puts "#{i}. #{deal.title}".cyan.bold
+#       puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+#       puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+#       puts "#{deal.posted}".gsub(/^/, "    ")
+#       puts ""
+#     end
+#   end
+# end
+
   def select_list_of_deals
     puts ""
     puts "Which list of the deals would you like to see?".upcase.cyan.bold
@@ -69,22 +89,42 @@ end
     @deals
   end
 
-  def list1_actions
-    @deals.each.with_index(1) do |deal, i|
-      if i < 10
-        puts "#{i}. #{deal.title}".cyan.bold
-        puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
-        puts "Deal value - #{deal.price}".gsub(/^/, "   ")
-        puts "#{deal.posted}".gsub(/^/, "   ")
-        puts ""
-      elsif i >= 10
-        puts "#{i}. #{deal.title}".cyan.bold
-        puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
-        puts "Deal value - #{deal.price}".gsub(/^/, "    ")
-        puts "#{deal.posted}".gsub(/^/, "    ")
-        puts ""
-      end
+  def deal_list
+    @deals.each do |deal|
+      i = "#{deal.number}".to_i
+    if  i < 10
+      puts "#{deal.number}. #{deal.title}".cyan.bold
+      puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
+      puts "Deal value - #{deal.price}".gsub(/^/, "   ")
+      puts "#{deal.posted}".gsub(/^/, "   ")
+      puts ""
+    elsif i >= 10
+      puts "#{i}. #{deal.title}".cyan.bold
+      puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+      puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+      puts "#{deal.posted}".gsub(/^/, "    ")
+      puts ""
     end
+  end
+  end
+
+  def list1_actions
+    #@deals.each.with_index(1) do |deal, i|
+      deal_list
+      # if i < 10
+      #   puts "#{i}. #{deal.title}".cyan.bold
+      #   puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
+      #   puts "Deal value - #{deal.price}".gsub(/^/, "   ")
+      #   puts "#{deal.posted}".gsub(/^/, "   ")
+      #   puts ""
+      # elsif i >= 10
+      #   puts "#{i}. #{deal.title}".cyan.bold
+      #   puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+      #   puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+      #   puts "#{deal.posted}".gsub(/^/, "    ")
+      #   puts ""
+      # end
+    #end
     input = nil
     while input != "exit"
 
@@ -115,13 +155,14 @@ end
   end
 
   def list2_actions
-    @deals.each.with_index(21) do |deal, i|
-        puts "#{i}. #{deal.title}".cyan.bold
-        puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
-        puts "Deal value - #{deal.price}".gsub(/^/, "    ")
-        puts "#{deal.posted}".gsub(/^/, "    ")
-        puts ""
-    end
+    deal_list
+    # @deals.each.with_index(21) do |deal, i|
+    #     puts "#{i}. #{deal.title}".cyan.bold
+    #     puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+    #     puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+    #     puts "#{deal.posted}".gsub(/^/, "    ")
+    #     puts ""
+    # end
     input = nil
     while input != "exit"
 

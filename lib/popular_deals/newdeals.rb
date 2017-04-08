@@ -1,7 +1,7 @@
 class PopularDeals::NewDeals
 
 
-  attr_accessor :title, :url, :deal_rating, :price, :posted, :name, :discription, :purchase, :purchase_link
+  attr_accessor :title, :url, :deal_rating, :price, :posted, :name, :discription, :purchase, :purchase_link, :number
   @@all = []
 
   def save
