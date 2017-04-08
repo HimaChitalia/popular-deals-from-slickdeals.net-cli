@@ -88,47 +88,29 @@ end
     input = nil
     while input != "exit"
 
-      puts ""
-      puts "Enter the number of deal you would like more info on or type Exit.".light_blue.bold
-      puts ""
+      deal_message
       input = gets.strip.downcase
       puts ""
 
       if input.to_i > 0 && input.to_i <= 20
-        puts ""
-        puts "-----------------------------------------------------------------------------------------------------------"
-        puts ""
+        space
         puts "Please see below details of deal no. #{input}".upcase.cyan.bold
-          disply_deal(BASE_URL, input, product_url)
-      elsif input.to_i >20 && input.to_i <= 100
-        input2 = nil
-        puts "Deal no #{input} is in different list. Do you want to see another list of deals? Type yes or No".yellow
-        input2 = gets.strip.downcase
-          if input2 == "yes"
-            select_list_of_deals
-            break
-          else
-            puts "Don't understand your command.".colorize(:color => :white, :background => :red)
-            puts "Type 'SELECT LIST' to see available deal lists.".yellow
-            puts "Type 'LIST' to see the current deal list.".yellow
-            puts "Type 'EXIT' to exit.".yellow
-            puts ""
-          end
+        disply_deal(BASE_URL, input, product_url)
+      elsif input.to_i > 20 && input.to_i <= 100
+        puts "Deal ##{input} is not from the list 1.".yellow
+        available_options
       elsif input == "list"
-        list_deals
+        list1_actions
+        break
       elsif input == "select list"
         select_list_of_deals
         break
       elsif input == "exit"
         goodbye
       else
-        puts "Don't understand your command.".colorize(:color => :white, :background => :red)
-        puts "Type 'SELECT LIST' to see available deal lists.".yellow
-        puts "Type 'LIST' to see the current deal list.".yellow
-        puts "Type 'EXIT' to exit.".yellow
-        puts ""
+        error_handling
+        available_options
       end
-
     end
   end
 
@@ -143,45 +125,27 @@ end
     input = nil
     while input != "exit"
 
-      puts ""
-      puts "Enter the number of deal you would like more info on or type Exit.".light_blue.bold
-      puts ""
+      deal_message
       input = gets.strip.downcase
       puts ""
       if input.to_i > 20 && input.to_i <= 40
-        puts ""
-        puts "-----------------------------------------------------------------------------------------------------------"
-        puts ""
+        space
         puts "Please see below details of deal no. #{input}".upcase.cyan.bold
-          disply_deal(BASE_URL, input, product_url)
-      elsif input.to_i > 0 && input.to_i < 21 || input.to_i > 40 && input.to_i <=100
-        input2 = nil
-        puts "Deal no #{input} is in different list. Do you want to see another list of deals? Type yes or No".yellow
-        input2 = gets.strip.downcase
-        puts ""
-          if input2 == "yes"
-            select_list_of_deals
-            break
-          else
-            puts "Don't understand your command.".colorize(:color => :white, :background => :red)
-            puts "Type 'SELECT LIST' to see available deal lists.".yellow
-            puts "Type 'LIST' to see the current deal list.".yellow
-            puts "Type 'EXIT' to exit.".yellow
-            puts ""
-          end
+        disply_deal(BASE_URL, input, product_url)
+      elsif input.to_i > 0 && input.to_i <= 20 || input.to_i > 40 && input.to_i <= 100
+        puts "Deal ##{input} is not from the list 2.".yellow
+        available_options
       elsif input == "list"
-        list_deals
+        list2_actions
+        break
       elsif input == "select list"
         select_list_of_deals
         break
       elsif input == "exit"
         goodbye
       else
-        puts "Don't understand your command.".colorize(:color => :white, :background => :red)
-        puts "Type 'SELECT LIST' to see available deal lists.".yellow
-        puts "Type 'LIST' to see the current deal list.".yellow
-        puts "Type 'EXIT' to exit.".yellow
-        puts ""
+        error_handling
+        available_options
       end
     end
   end
@@ -197,47 +161,29 @@ end
     input = nil
     while input != "exit"
 
-      puts ""
-      puts "Enter the number of deal you would like more info on or type Exit.".light_blue.bold
-      puts ""
+      deal_message
       input = gets.strip.downcase
       puts ""
 
       if input.to_i > 40 && input.to_i <= 60
-        puts ""
-        puts "-----------------------------------------------------------------------------------------------------------"
-        puts ""
+        space
         puts "Please see below details of deal no. #{input}".upcase.cyan.bold
-          disply_deal(BASE_URL, input, product_url)
-      elsif input.to_i > 0 && input.to_i < 41 || input.to_i > 60 && input.to_i <= 100
-        input2 = nil
-        puts "Deal no #{input} is in different list. Do you want to see another list of deals? Type yes or No".yellow
-        input2 = gets.strip.downcase
-          if input2 == "yes"
-            select_list_of_deals
-            break
-          else
-            puts "Don't understand your command.".colorize(:color => :white, :background => :red)
-            puts "Type 'SELECT LIST' to see available deal lists.".yellow
-            puts "Type 'LIST' to see the current deal list.".yellow
-            puts "Type 'EXIT' to exit.".yellow
-            puts ""
-          end
+        disply_deal(BASE_URL, input, product_url)
+      elsif input.to_i > 0 && input.to_i <= 40 || input.to_i > 60 && input.to_i <= 100
+        puts "Deal ##{input} is not from the list 3.".yellow
+        available_options
       elsif input == "list"
-        list_deals
+        list3_actions
+        break
       elsif input == "select list"
         select_list_of_deals
         break
       elsif input == "exit"
         goodbye
       else
-        puts "Don't understand your command.".colorize(:color => :white, :background => :red)
-        puts "Type 'SELECT LIST' to see available deal lists.".yellow
-        puts "Type 'LIST' to see the current deal list.".yellow
-        puts "Type 'EXIT' to exit.".yellow
-        puts ""
+        error_handling
+        available_options
       end
-
     end
   end
 
@@ -252,44 +198,27 @@ end
     input = nil
     while input != "exit"
 
-      puts ""
-      puts "Enter the number of deal you would like more info on or type Exit.".light_blue.bold
-      puts ""
+      deal_message
       input = gets.strip.downcase
       puts ""
       if input.to_i > 60 && input.to_i <= 80
-        puts ""
-        puts "-----------------------------------------------------------------------------------------------------------"
-        puts ""
+        space
         puts "Please see below details of deal no. #{input}".upcase.cyan.bold
-          disply_deal(BASE_URL, input, product_url)
-      elsif input.to_i > 0 && input.to_i < 61 || input.to_i > 80 && input.to_i <=100
-        input2 = nil
-        puts "Deal no #{input} is in different list. Do you want to see another list of deals? Type yes or No".yellow
-        input2 = gets.strip.downcase
-          if input2 == "yes"
-            select_list_of_deals
-            break
-          else
-            puts "Don't understand your command.".colorize(:color => :white, :background => :red)
-            puts "Type 'SELECT LIST' to see available deal lists.".yellow
-            puts "Type 'LIST' to see the current deal list.".yellow
-            puts "Type 'EXIT' to exit.".yellow
-            puts ""
-          end
+        disply_deal(BASE_URL, input, product_url)
+      elsif input.to_i > 0 && input.to_i <= 60 || input.to_i > 80 && input.to_i <= 100
+        puts "Deal ##{input} is not from the list 4.".yellow
+        available_options
       elsif input == "list"
-        list_deals
+        list4_actions
+        break
       elsif input == "select list"
         select_list_of_deals
         break
       elsif input == "exit"
         goodbye
       else
-        puts "Don't understand your command.".colorize(:color => :white, :background => :red)
-        puts "Type 'SELECT LIST' to see available deal lists.".yellow
-        puts "Type 'LIST' to see the current deal list.".yellow
-        puts "Type 'EXIT' to exit.".yellow
-        puts ""
+        error_handling
+        available_options
       end
     end
   end
@@ -313,46 +242,52 @@ end
     input = nil
     while input != "exit"
 
-      puts ""
-      puts "Enter the number of deal you would like more info on or type Exit.".light_blue.bold
-      puts ""
+      deal_message
       input = gets.strip.downcase
       puts ""
       if input.to_i > 80 && input.to_i <= 100
-        puts ""
-        puts "-----------------------------------------------------------------------------------------------------------"
-        puts ""
+        space
         puts "Please see below details of deal no. #{input}".upcase.cyan.bold
-          disply_deal(BASE_URL, input, product_url)
-      elsif input.to_i > 0 && input.to_i < 81
-        input2 = nil
-        puts "Deal no #{input} is in different list. Do you want to see another list of deals? Type yes or No".yellow
-        input2 = gets.strip.downcase
-          if input2 == "yes"
-            select_list_of_deals
-            break
-          else
-            puts "Don't understand your command.".colorize(:color => :white, :background => :red)
-            puts "Type 'SELECT LIST' to see available deal lists.".yellow
-            puts "Type 'LIST' to see the current deal list.".yellow
-            puts "Type 'EXIT' to exit.".yellow
-            puts ""
-          end
+        disply_deal(BASE_URL, input, product_url)
+      elsif input.to_i > 0 && input.to_i <= 80
+        puts "Deal ##{input} is not from the list 5.".yellow
+        available_options
       elsif input == "list"
-        list_deals
+        list5_actions
+        break
       elsif input == "select list"
         select_list_of_deals
         break
       elsif input == "exit"
         goodbye
       else
-        puts "Don't understand your command.".colorize(:color => :white, :background => :red)
-        puts "Type 'SELECT LIST' to see available deal lists.".yellow
-        puts "Type 'LIST' to see the current deal list.".yellow
-        puts "Type 'EXIT' to exit.".yellow
-        puts ""
+        error_handling
+        available_options
       end
     end
+  end
+
+  def space
+    puts ""
+    puts "-----------------------------------------------------------------------------------------------------------"
+    puts ""
+  end
+
+  def deal_message
+    puts ""
+    puts "Enter the number of deal you would like more info on or type Exit.".light_blue.bold
+    puts ""
+  end
+
+  def error_handling
+    puts "Don't understand your command.".colorize(:color => :white, :background => :red)
+  end
+
+  def available_options
+    puts "Type 'SELECT LIST' to see available deal lists.".yellow
+    puts "Type 'LIST' to see the current deal list.".yellow
+    puts "Type 'EXIT' to exit.".yellow
+    puts ""
   end
 
   def disply_deal(base_url, input, product_url)
@@ -373,10 +308,7 @@ end
       puts "To lock this deal, please visit:".upcase.magenta.bold.gsub(/^/, "    ")
       puts "#{deal[keys[2]]}".gsub(/^/, "    ")
     end
-
-    puts ""
-    puts "-----------------------------------------------------------------------------------------------------------"
-    puts ""
+    space
   end
 
   def goodbye
