@@ -30,58 +30,29 @@ class PopularDeals::CLI
     puts "Type 4 for the fourth list of 61-80 deals.".yellow
     puts "Type 5 for the fifth list of 81-100 deals.".yellow
     puts ""
-    #@input1 = gets.strip.to_i
     @input1 = gets.strip.downcase
     available_lists
   end
 
   def available_lists
-    #while @input1 != "exit"
     integer_input = @input1.to_i
 
-      if integer_input == 1
-        list1_actions
-      elsif integer_input == 2
-        list2_actions
-      elsif integer_input == 3
-        list3_actions
-      elsif integer_input == 4
-        list4_actions
-      elsif integer_input == 5
-        list5_actions
-      elsif @input1 == "exit"
-        goodbye
-        #break
-      else
-        puts "Don't understand that command".colorize(:color => :white, :background => :red)
-        select_list_of_deals
-      end
-    #end
-  end
-
-  def deal_list
-  @deals.each do |deal|
-      i = "#{deal.number}".to_i
-    if  i < 10
-      puts "#{i}. #{deal.title}".cyan.bold
-      puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
-      puts "Deal value - #{deal.price}".gsub(/^/, "   ")
-      puts "#{deal.posted}".gsub(/^/, "   ")
-      puts ""
-    elsif i >= 10
-      puts "#{i}. #{deal.title}".cyan.bold
-      puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
-      puts "Deal value - #{deal.price}".gsub(/^/, "    ")
-      puts "#{deal.posted}".gsub(/^/, "    ")
-      puts ""
-    elsif i >= 100
-      puts "#{i}. #{deal.title}".cyan.bold
-      puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "     ")
-      puts "Deal value - #{deal.price}".gsub(/^/, "     ")
-      puts "#{deal.posted}".gsub(/^/, "     ")
-      puts ""
+    if integer_input == 1
+      list1_actions
+    elsif integer_input == 2
+      list2_actions
+    elsif integer_input == 3
+      list3_actions
+    elsif integer_input == 4
+      list4_actions
+    elsif integer_input == 5
+      list5_actions
+    elsif @input1 == "exit"
+      goodbye
+    else
+      puts "Don't understand that command".colorize(:color => :white, :background => :red)
+      select_list_of_deals
     end
-  end
   end
 
   def list1_actions
@@ -129,6 +100,33 @@ class PopularDeals::CLI
     show_deal_detail
   end
 
+  # All of he below methods just support main methods.
+
+  def deal_list
+    @deals.each do |deal|
+      i = "#{deal.number}".to_i
+      if  i < 10
+        puts "#{i}. #{deal.title}".cyan.bold
+        puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "   ")
+        puts "Deal value - #{deal.price}".gsub(/^/, "   ")
+        puts "#{deal.posted}".gsub(/^/, "   ")
+        puts ""
+      elsif i >= 10
+        puts "#{i}. #{deal.title}".cyan.bold
+        puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "    ")
+        puts "Deal value - #{deal.price}".gsub(/^/, "    ")
+        puts "#{deal.posted}".gsub(/^/, "    ")
+        puts ""
+      elsif i >= 100
+        puts "#{i}. #{deal.title}".cyan.bold
+        puts "Deal rating: #{deal.deal_rating}.".gsub(/^/, "     ")
+        puts "Deal value - #{deal.price}".gsub(/^/, "     ")
+        puts "#{deal.posted}".gsub(/^/, "     ")
+        puts ""
+      end
+    end
+  end
+
   def deal_numbers
     @deal_numbers = []
     @deals.each do |deal|
@@ -147,6 +145,7 @@ class PopularDeals::CLI
       puts ""
       i = input.to_i
       deal_numbers
+
       if @deal_numbers.include?(i)
         space
         puts "Please see below details of deal no. #{input}".upcase.cyan.bold
@@ -167,8 +166,8 @@ class PopularDeals::CLI
         error_handling
         available_options
       end
+
     end
-    #break
   end
 
   def space
